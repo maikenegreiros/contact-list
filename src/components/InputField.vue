@@ -8,9 +8,12 @@
 <style scoped>
 .InputField_container {
   display: inline-block;
+  width: 100%;
 }
 
 .InputField_input {
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px 18px;
   margin-top: 8px;
   font-size: 14px;

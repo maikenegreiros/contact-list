@@ -3,8 +3,12 @@
     <h1 class="ContactForm_title">Meus contatos</h1>
     <div class="ContactForm_widthLimiter">
       <div class="ContactForm_InputsContainer">
-        <InputField name="name" label="Nome" />
-        <InputField name="lastname" label="Sobrenome" />
+        <div class="ContactForm_InputFieldWrapper">
+          <InputField name="name" label="Nome" />
+        </div>
+        <div class="ContactForm_InputFieldWrapper">
+          <InputField name="lastname" label="Sobrenome" />
+        </div>
       </div>
       <div class="ContactForm_ContactBoxContainer">
         <ContactBox />
@@ -17,7 +21,7 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .ContactForm_title {
   font-family: hurme-geometric-sans, sans-serif;
   text-align: left;
@@ -28,6 +32,16 @@
 .ContactForm_InputsContainer {
   display: flex;
   justify-content: space-between;
+}
+
+.ContactForm_InputFieldWrapper {
+  width: 100%;
+  &:first-child {
+    margin-right: 7.5px;
+  }
+  &:last-child {
+    margin-left: 7.5px;
+  }
 }
 
 .ContactForm_container {
