@@ -8,12 +8,11 @@
 .FormButton_buttonElement {
   font-family: futura-book;
   font-size: 18px;
-  background-color: var(--bg-color);
-  color: var(--color);
-  width: 188px;
-  height: 40px;
+  padding: 10px 60px;
   border-radius: 35px;
   border: none;
+  background-color: var(--bg-color);
+  color: var(--color);
   cursor: pointer;
 }
 </style>
