@@ -21,3 +21,12 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Backend
+
+backend/vendor
+backend/.idea
+backend/Homestead.json
+backend/Homestead.yaml
+backend/.env
+backend/.phpunit.result.cache
