@@ -116,12 +116,33 @@ export default {
 }
 
 .ContactBox_closeIcon {
-  width: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
   height: 15px;
+  padding: 1.5px;
+  border-radius: 50%;
   background-color: #8d8d8d;
+  cursor: pointer;
   &::before {
-    content: "x";
-    display: block;
+    position: absolute;
+    content: "";
+    background-color: white;
+    display: flex;
+    width: 12px;
+    height: 2px;
+    transform: rotateZ(45deg);
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    background-color: white;
+    display: flex;
+    width: 12px;
+    height: 2px;
+    transform: rotateZ(-45deg);
   }
 }
 </style>
