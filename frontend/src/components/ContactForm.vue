@@ -4,10 +4,14 @@
     <div class="ContactForm_widthLimiter">
       <div class="ContactForm_InputsContainer">
         <div class="ContactForm_InputFieldWrapper">
-          <InputField name="name" label="Nome" />
+          <InputField name="name" label="Nome" :value="name" />
         </div>
         <div class="ContactForm_InputFieldWrapper">
-          <InputField name="lastname" label="Sobrenome" />
+          <InputField
+            name="lastname"
+            label="Sobrenome"
+            :value="lastname"
+          />
         </div>
       </div>
       <div class="ContactForm_ContactBoxContainer">
@@ -15,8 +19,13 @@
       </div>
     </div>
     <div class="ContactForm_ButtonsContainer">
-      <FormButton text="Salvar" />
-      <FormButton text="Cancelar" bgColor="transparent" color="#8D8D8D" />
+      <FormButton text="Salvar" @click.native="onSave()" />
+      <FormButton
+        text="Cancelar"
+        bgColor="transparent"
+        color="#8D8D8D"
+        @click="onCancel()"
+      />
     </div>
   </div>
 </template>
@@ -26,7 +35,7 @@
   font-family: hurme-geometric-sans, sans-serif;
   text-align: left;
   text-transform: uppercase;
-  color: #1B3949;
+  color: #1b3949;
 }
 
 .ContactForm_InputsContainer {
@@ -69,6 +78,7 @@
 import InputField from "./InputField.vue";
 import ContactBox from "./ContactBox.vue";
 import FormButton from "./FormButton.vue";
+import { addNewContact } from "../requests/Contacts";
 
 export default {
   name: "ContactForm",
@@ -76,6 +86,35 @@ export default {
     InputField,
     ContactBox,
     FormButton,
+  },
+  computed: {
+    name: {
+      set(name) {
+        this.$store.commit("changeName", name);
+      },
+      get() {
+        return this.$store.state.name;
+      },
+    },
+    lastname: {
+      set(lastname) {
+        this.$store.commit("changeLastName", lastname);
+      },
+      get() {
+        return this.$store.state.lastname;
+      },
+    },
+  },
+  methods: {
+    async onSave() {
+      console.log("name", this.$store.state.name);
+      console.log("lastname", this.$store.state.lastname);
+      addNewContact(this.$store.state);
+    },
+    validate() {
+      // const { name, lastname, contacts } = this.$store.state;
+    },
+    onCancel() {},
   },
 };
 </script>

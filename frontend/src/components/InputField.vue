@@ -1,7 +1,7 @@
 <template>
   <div class="InputField_container">
     <label class="InputField_label">{{ label }}</label>
-    <input class="InputField_input" :type="type" :name="name" />
+    <input class="InputField_input" :type="type" :name="name" v-model="value" />
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
   props: {
     name: String,
     label: String,
+    value: String,
     type: {
       type: String,
       default: "text",
