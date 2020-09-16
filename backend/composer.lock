@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1838e7b29b68339e64c3ddfea821bdbb",
+    "content-hash": "a81ca67d975876bf0caafd426e282cf5",
     "packages": [
         {
             "name": "brick/math",
@@ -1766,6 +1766,46 @@
                 "lumen"
             ],
             "time": "2020-09-15T15:14:48+00:00"
+        },
+        {
+            "name": "maike/iterable",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maikenegreiros/Iterable.git",
+                "reference": "8d3b0ff8e1fa48d34bb12b094c3dfe3513d68eca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maikenegreiros/Iterable/zipball/8d3b0ff8e1fa48d34bb12b094c3dfe3513d68eca",
+                "reference": "8d3b0ff8e1fa48d34bb12b094c3dfe3513d68eca",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Iterable\\": "./src",
+                    "Tests\\": "./tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maike Negreiros",
+                    "email": "maike.anegreiros@gmail.com"
+                }
+            ],
+            "description": "An abstract class that gives you the power of making your class iterable",
+            "time": "2020-09-02T16:35:12+00:00"
         },
         {
             "name": "monolog/monolog",
