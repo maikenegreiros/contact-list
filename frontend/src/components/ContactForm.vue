@@ -20,7 +20,7 @@
         text="Cancelar"
         bgColor="transparent"
         color="#8D8D8D"
-        @click.native="onCancel()"
+        @click.native="clearForm()"
       />
     </div>
   </div>
@@ -85,9 +85,15 @@ export default {
   },
   methods: {
     async onSave() {
-      addNewContact(this.$store.state);
+      try {
+        addNewContact(this.$store.state);
+        alert('Contato cadastrado com sucesso');
+        this.clearForm();
+      } catch (error) {
+        alert(error.message)
+      }
     },
-    onCancel() {
+    clearForm() {
       this.$store.commit("clear");
     },
   },

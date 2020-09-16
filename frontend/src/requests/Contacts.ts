@@ -1,4 +1,4 @@
-const contactsEndpoint = "/";
+const baseUri = "http://localhost:9000";
 
 interface Contact {
   name: String,
@@ -8,8 +8,12 @@ interface Contact {
 
 export const addNewContact = (contact: Contact) => {
   const body = JSON.stringify(contact);
-  fetch(contactsEndpoint, {
+  fetch(`${baseUri}/persons`, {
     method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     body,
   });
 };
