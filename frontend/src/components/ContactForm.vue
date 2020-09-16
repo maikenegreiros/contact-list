@@ -4,14 +4,10 @@
     <div class="ContactForm_widthLimiter">
       <div class="ContactForm_InputsContainer">
         <div class="ContactForm_InputFieldWrapper">
-          <InputField name="name" label="Nome" :value="name" />
+          <InputField name="name" label="Nome" stateKey="name" />
         </div>
         <div class="ContactForm_InputFieldWrapper">
-          <InputField
-            name="lastname"
-            label="Sobrenome"
-            :value="lastname"
-          />
+          <InputField name="lastname" label="Sobrenome" stateKey="lastname" />
         </div>
       </div>
       <div class="ContactForm_ContactBoxContainer">
@@ -24,7 +20,7 @@
         text="Cancelar"
         bgColor="transparent"
         color="#8D8D8D"
-        @click="onCancel()"
+        @click.native="onCancel()"
       />
     </div>
   </div>
@@ -87,34 +83,13 @@ export default {
     ContactBox,
     FormButton,
   },
-  computed: {
-    name: {
-      set(name) {
-        this.$store.commit("changeName", name);
-      },
-      get() {
-        return this.$store.state.name;
-      },
-    },
-    lastname: {
-      set(lastname) {
-        this.$store.commit("changeLastName", lastname);
-      },
-      get() {
-        return this.$store.state.lastname;
-      },
-    },
-  },
   methods: {
     async onSave() {
-      console.log("name", this.$store.state.name);
-      console.log("lastname", this.$store.state.lastname);
       addNewContact(this.$store.state);
     },
-    validate() {
-      // const { name, lastname, contacts } = this.$store.state;
+    onCancel() {
+      this.$store.commit("clear");
     },
-    onCancel() {},
   },
 };
 </script>
