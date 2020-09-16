@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="ContactBox_container"
+      class="ContactBox_container solid"
       v-for="contact in $store.state.contacts"
       :key="contact"
     >
@@ -14,14 +14,14 @@
         readonly
         class="ContactBox_input"
       />
-      <div
+      <button
         class="ContactBox_closeIcon"
         aria-label="Close Button"
         @click="removeContact(contact)"
       />
     </div>
 
-    <div class="ContactBox_container">
+    <div class="ContactBox_container writable">
       <div class="ContactBox_plusIcon">
         <PlusIcon />
       </div>
@@ -35,13 +35,14 @@
         @blur="onInputBlur()"
         @keyup.enter="addContact()"
       />
-      <div
+      <button
         v-if="isInputFocused"
         class="ContactBox_enterIcon"
+        aria-label="Add contact"
         @click="addContact()"
       >
         <EnterIcon />
-      </div>
+      </button>
     </div>
   </div>
 </template>
@@ -91,8 +92,16 @@ export default {
   justify-content: flex-start;
   align-items: center;
   padding: 14px 17px;
-  border: 1px dashed #95989a;
-  box-shadow: 0 3px 8px #0000001a;
+  &.writable {
+    border: 1px dashed #95989a;
+    box-shadow: 0 3px 8px #0000001a;
+  }
+  &.solid {
+    border: 1px solid #95989a;
+  }
+  &:not(:first-child) {
+    border-top: none;
+  }
 }
 
 .ContactBox_plusIcon {
@@ -112,6 +121,8 @@ export default {
 }
 
 .ContactBox_enterIcon {
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -123,7 +134,9 @@ export default {
   min-width: 15px;
   height: 15px;
   padding: 1.5px;
+  border: none;
   border-radius: 50%;
+  box-sizing: content-box;
   background-color: #8d8d8d;
   cursor: pointer;
   &::before {
