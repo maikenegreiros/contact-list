@@ -16,12 +16,14 @@ class PersonsController extends Controller
 
   public function index()
   {
-    return response()->json('OK', 200);
+    $personsPresenters = $this->contactList->listAll();
+    return response()->json($personsPresenters, 200);
   }
 
   public function show($id)
   {
-
+    $personPresenter = $this->contactList->getOnePerson($id);
+    return response()->json($personPresenter, 200);
   }
 
   public function store(Request $request)

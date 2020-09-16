@@ -2,10 +2,6 @@
 namespace App\Domain\ContactList\Services;
 
 use App\Domain\ContactList\Entities\Person;
-use App\Domain\ContactList\Presenters\ContactPresenter;
-use App\Domain\ContactList\Presenters\ContactPresenterCollection;
-use App\Domain\ContactList\Presenters\PersonPresenter;
-use App\Domain\ContactList\Presenters\PersonPresenterCollection;
 use App\Domain\ContactList\Repositories\ContactListRepository;
 use App\Domain\ContactList\ValueObjects\Contact;
 use App\Domain\ContactList\ValueObjects\ContactCollection;
@@ -38,42 +34,39 @@ class ContactList {
     return new ContactCollection(...$contactsArray);
   }
 
-  public function listAll(): PersonPresenterCollection
+  public function listAll(): array
   {
     $personEntities = $this->repository->getAllPersons();
     $presenters = [];
     foreach ($personEntities as $personEntity) {
-      $presenters[] = new PersonPresenter(
-        $personEntity->getId(),
-        $personEntity->getName(),
-        $personEntity->getLastName(),
-        $this->getContactsPresenterFromEntity($personEntity->getContacts())
-      );
+      $presenters[] = [
+        'id' => $personEntity->getId(),
+        'name' => $personEntity->getName(),
+        'lastname' => $personEntity->getLastName(),
+        'contacts' => $this->getContactsPresenterFromEntity($personEntity->getContacts())
+      ];
     }
 
-    return new PersonPresenterCollection(...$presenters);
+    return $presenters;
   }
 
-  private function getContactsPresenterFromEntity(ContactCollection $contacts): ContactPresenterCollection
+  private function getContactsPresenterFromEntity(ContactCollection $contacts): array
   {
     $presenters = [];
     foreach ($contacts as $contact) {
-      $presenters[] = new ContactPresenter(
-        $contact->getId(),
-        $contact->getContact()
-      );
+      $presenters[] = $contact->getContact();
     }
-    return new ContactPresenterCollection(...$presenters);
+    return $presenters;
   }
 
-  public function getOnePerson(int $id)
+  public function getOnePerson(int $id): array
   {
     $personEntity = $this->repository->getPersonById($id);
-    return new PersonPresenter(
-      $personEntity->getId(),
-      $personEntity->getName(),
-      $personEntity->getLastName(),
-      $this->getContactsPresenterFromEntity($personEntity->getContacts())
-    );
+    return [
+      'id' => $personEntity->getId(),
+      'name' => $personEntity->getName(),
+      'lastname' => $personEntity->getLastName(),
+      'contacts' => $this->getContactsPresenterFromEntity($personEntity->getContacts())
+    ];
   }
 }

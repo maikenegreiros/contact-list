@@ -8,6 +8,7 @@ use App\Domain\ContactList\ValueObjects\ContactCollection;
 use App\Domain\ContactList\Repositories\ContactListRepository;
 use App\Models\Person as PersonModel;
 use App\Models\Contact as ContactModel;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class ContactListEloquentRepository implements ContactListRepository {
   public function store(Person $person) {
@@ -37,32 +38,38 @@ class ContactListEloquentRepository implements ContactListRepository {
 
   public function getAllPersons(): PersonCollection
   {
-    $personsArray = PersonModel::with('contacts')->all();
+    $personsEloquent = PersonModel::with('contacts')->get();
     $personEntityArray = [];
-    foreach ($personsArray as $onePersonArray) {
-      $personEntityArray[] = new Person(
-        $onePersonArray['name'],
-        $onePersonArray['lastname'],
-        $this->getContactCollectionFromArray($onePersonArray['contact'])
+    foreach ($personsEloquent as $onePersonEloquent) {
+      $personEntity = new Person(
+        $onePersonEloquent->name,
+        $onePersonEloquent->lastname,
+        $this->getContactCollectionFromArray($onePersonEloquent->contacts)
       );
+      $personEntity->setId($onePersonEloquent->id);
+      $personEntityArray[] = $personEntity;
     }
     return new PersonCollection(...$personEntityArray);
   }
 
-  private function getContactCollectionFromArray(array $contacts): ContactCollection
+  private function getContactCollectionFromArray(EloquentCollection $contacts): ContactCollection
   {
-    $dataToContactObject = fn($c) => new Contact($c['contact']);
-    $contactsEntitiesArray = array_map($dataToContactObject, $contacts);
+    $contactsEntitiesArray = [];
+    foreach ($contacts as $contact) {
+      $contactsEntitiesArray[] = new Contact($contact->contact, $contact->id);
+    }
     return new ContactCollection(...$contactsEntitiesArray);
   }
 
   public function getPersonById(int $id): Person
   {
-    $personArray = PersonModel::findOrFail($id);
-    return new Person(
-      $personArray['name'],
-      $personArray['lastname'],
-      $this->getContactCollectionFromArray($personArray)
+    $personEloquent = PersonModel::findOrFail($id);
+    $person = new Person(
+      $personEloquent->name,
+      $personEloquent->lastname,
+      $this->getContactCollectionFromArray($personEloquent->contacts)
     );
+    $person->setId($personEloquent->id);
+    return $person;
   }
 }
