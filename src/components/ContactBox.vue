@@ -71,6 +71,7 @@ export default {
     },
     addContact() {
       const { input } = this.$refs;
+      if (input.value === "") return;
       this.$store.commit("addContact", input.value);
       this.clearInput();
     },
