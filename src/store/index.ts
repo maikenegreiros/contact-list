@@ -5,9 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    name: "",
-    lastname: "",
-    contacts: [],
+    name: String(),
+    lastname: String(),
+    contacts: Array<String>(),
   },
   getters: {},
   mutations: {
@@ -17,7 +17,7 @@ export default new Vuex.Store({
     changeLastName(state, payload) {
       state.lastname = payload;
     },
-    addContact(state, payload) {
+    addContact(state, payload: string) {
       state.contacts.push(payload);
     },
     removeContact(state, payload) {
