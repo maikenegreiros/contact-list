@@ -14,21 +14,6 @@ services:
     links:
       - db
 
-  migrations:
-    build: .
-    environment:
-      DB_HOST: db
-      DB_DATABASE: tog-design-challenge
-      DB_PORT: 3306
-      DB_USERNAME: root
-      DB_PASSWORD: root
-    working_dir: /app
-    volumes:
-      - ".:/app"
-    command: php artisan migrate
-    links:
-      - db
-
   db:
     image: mysql:latest
     ports:

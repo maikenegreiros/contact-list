@@ -20,7 +20,7 @@ Finally, setup frontend
 ```
 make frontend
 ```
-Once everything is setup, you can access frontend in `http://localhost:8081`
+Once everything is setup, you can access frontend in `http://localhost:8080`
 
 Backend is running in `http://localhost:9000` and have the following endpoints:
 
