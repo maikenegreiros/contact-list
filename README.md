@@ -11,6 +11,8 @@ In order to get this project running, simply run the followind command.
 ```
 make app
 ```
+This command will setup all the project (mysql DB, PHP server, frontend). So it may take a while.
+
 Once everything is setup, you can access frontend in `http://localhost:8080`
 
 Backend is running in `http://localhost:9000` and have the following endpoints:
