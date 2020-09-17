@@ -1,24 +1,29 @@
 # tog-design-challenge
 
-## Project setup
-```
-yarn install
-```
+## project dependencies
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+- docker:19.03.12
+- docker-compose:1.17.1
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Setup
+In order to get this project running, follow these steps.
 
-### Lints and fixes files
+First, setup database
 ```
-yarn lint
+make database
 ```
+Once database is up, run setup backend
+```
+make backend
+```
+Finally, setup frontend
+```
+make frontend
+```
+Once everything is setup, you can access frontend in `http://localhost:8081`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Backend is running in `http://localhost:9000` and have the following endpoints:
+
+1. POST /persons
+2. GET /persons
+3. GET /persons/{id}

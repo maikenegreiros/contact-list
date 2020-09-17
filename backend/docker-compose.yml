@@ -1,0 +1,58 @@
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - 9000:9000
+    environment:
+      DB_HOST: db
+      DB_DATABASE: tog-design-challenge
+      DB_PORT: 3306
+    volumes:
+      - ".:/app"
+    command: php -S 0.0.0.0:9000 -t /app/public/
+    links:
+      - db
+
+  migrations:
+    build: .
+    environment:
+      DB_HOST: db
+      DB_DATABASE: tog-design-challenge
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    working_dir: /app
+    volumes:
+      - ".:/app"
+    command: php artisan migrate
+    links:
+      - db
+
+  db:
+    image: mysql:latest
+    ports:
+    - "3308:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tog-design-challenge
+    volumes:
+      - ./environment/database:/docker-entrypoint-initdb.d
+
+  build:
+    image: composer:latest
+    working_dir: /app
+    volumes:
+      - ".:/app"
+    command: composer install --no-dev
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    ports:
+      - '8001:80'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
