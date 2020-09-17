@@ -1,24 +1,15 @@
-# tog-design-challenge
+# Tog Design Challenge
 
-## project dependencies
+## Project dependencies
 
 - docker:19.03.12
 - docker-compose:1.17.1
 
 ## Setup
-In order to get this project running, follow these steps.
+In order to get this project running, simply run the followind command.
 
-First, setup database
 ```
-make database
-```
-Once database is up, run setup backend
-```
-make backend
-```
-Finally, setup frontend
-```
-make frontend
+make app
 ```
 Once everything is setup, you can access frontend in `http://localhost:8080`
 
