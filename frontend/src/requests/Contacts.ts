@@ -6,9 +6,9 @@ interface Contact {
   contacts: String[]
 }
 
-export const addNewContact = (contact: Contact) => {
+export const addNewContact = async (contact: Contact) => {
   const body = JSON.stringify(contact);
-  fetch(`${baseUri}/persons`, {
+  const response = await fetch(`${baseUri}/persons`, {
     method: "POST",
     headers: {
       'Accept': 'application/json',
@@ -16,4 +16,7 @@ export const addNewContact = (contact: Contact) => {
     },
     body,
   });
+  if (response.status !== 200) {
+    throw new Error("Algum erro aconteceu");
+  }
 };

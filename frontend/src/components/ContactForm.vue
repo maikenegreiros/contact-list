@@ -86,11 +86,11 @@ export default {
   methods: {
     async onSave() {
       try {
-        addNewContact(this.$store.state);
-        alert('Contato cadastrado com sucesso');
+        await addNewContact(this.$store.state);
+        alert("Contato cadastrado com sucesso");
         this.clearForm();
       } catch (error) {
-        alert(error.message)
+        alert(error.message);
       }
     },
     clearForm() {
