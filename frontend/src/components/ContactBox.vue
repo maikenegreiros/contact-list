@@ -48,42 +48,42 @@
 </template>
 
 <script>
-import PlusIcon from "../assets/outline-cancel-24px.svg";
-import EnterIcon from "../assets/round-subdirectory_arrow_left-24px.svg";
+import PlusIcon from "../assets/outline-cancel-24px.svg"
+import EnterIcon from "../assets/round-subdirectory_arrow_left-24px.svg"
 
 export default {
   name: "ContactBox",
-  data() {
+  data () {
     return {
-      isInputFocused: false,
-    };
+      isInputFocused: false
+    }
   },
   components: {
     PlusIcon,
-    EnterIcon,
+    EnterIcon
   },
   methods: {
-    onInputFocus() {
-      this.isInputFocused = true;
+    onInputFocus () {
+      this.isInputFocused = true
     },
-    onInputBlur() {
-      if (this.$refs.input.value !== "") return;
-      this.isInputFocused = false;
+    onInputBlur () {
+      if (this.$refs.input.value !== "") return
+      this.isInputFocused = false
     },
-    addContact() {
-      const { input } = this.$refs;
-      if (input.value === "") return;
-      this.$store.commit("addContact", input.value);
-      this.clearInput();
+    addContact () {
+      const { input } = this.$refs
+      if (input.value === "") return
+      this.$store.commit("addContact", input.value)
+      this.clearInput()
     },
-    removeContact(contact) {
-      this.$store.commit("removeContact", contact);
+    removeContact (contact) {
+      this.$store.commit("removeContact", contact)
     },
-    clearInput() {
-      this.$refs.input.value = "";
-    },
-  },
-};
+    clearInput () {
+      this.$refs.input.value = ""
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

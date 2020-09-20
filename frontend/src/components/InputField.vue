@@ -5,7 +5,7 @@
       class="InputField_input"
       :type="type"
       :name="name"
-      v-model="$store.state[stateKey]"
+      v-model="inputValue"
     />
   </div>
 </template>
@@ -43,8 +43,18 @@ export default {
     stateKey: String,
     type: {
       type: String,
-      default: "text",
-    },
+      default: "text"
+    }
   },
-};
+  computed: {
+    inputValue: {
+      get () {
+        return this.$store.state[this.stateKey]
+      },
+      set (value) {
+        this.$store.state[this.stateKey] = value
+      }
+    }
+  }
+}
 </script>

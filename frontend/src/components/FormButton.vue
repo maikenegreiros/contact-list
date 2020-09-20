@@ -23,20 +23,20 @@ export default {
     text: String,
     bgColor: {
       type: String,
-      default: "#ffa700",
+      default: "#ffa700"
     },
     color: {
       type: String,
-      default: "#fff",
-    },
+      default: "#fff"
+    }
   },
   computed: {
-    cssVars() {
+    cssVars () {
       return {
         "--bg-color": this.bgColor,
-        "--color": this.color,
-      };
-    },
-  },
-};
+        "--color": this.color
+      }
+    }
+  }
+}
 </script>

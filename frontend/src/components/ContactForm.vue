@@ -71,31 +71,31 @@
 </style>
 
 <script>
-import InputField from "./InputField.vue";
-import ContactBox from "./ContactBox.vue";
-import FormButton from "./FormButton.vue";
-import { addNewContact } from "../requests/Contacts";
+import InputField from "./InputField.vue"
+import ContactBox from "./ContactBox.vue"
+import FormButton from "./FormButton.vue"
+import { addNewContact } from "../requests/Contacts"
 
 export default {
   name: "ContactForm",
   components: {
     InputField,
     ContactBox,
-    FormButton,
+    FormButton
   },
   methods: {
-    async onSave() {
+    async onSave () {
       try {
-        await addNewContact(this.$store.state);
-        alert("Contato cadastrado com sucesso");
-        this.clearForm();
+        await addNewContact(this.$store.state)
+        alert("Contato cadastrado com sucesso")
+        this.clearForm()
       } catch (error) {
-        alert(error.message);
+        alert(error.message)
       }
     },
-    clearForm() {
-      this.$store.commit("clear");
-    },
-  },
-};
+    clearForm () {
+      this.$store.commit("clear")
+    }
+  }
+}
 </script>
