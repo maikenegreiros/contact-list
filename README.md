@@ -1,4 +1,5 @@
-# Tog Design Challenge
+# Contact List
+A simple contact list application
 
 ## Project dependencies
 
